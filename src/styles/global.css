@@ -1,0 +1,72 @@
+/* Estilos comunes a todas las páginas. Los de cada página van en su propio bloque. */
+
+html { scroll-behavior: smooth; }
+img, video { max-width: 100%; }
+:focus-visible { outline: 2px solid #800039; outline-offset: 3px; }
+[id] { scroll-margin-top: 100px; }
+
+/* Campo trampa contra spam: invisible para personas */
+.trampa { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
+
+.form-error { margin: 0; font-size: 15px; color: #800039; font-weight: 600; }
+button.hablamos:disabled { opacity: .6; cursor: wait; }
+
+/* ---------- Aviso de cookies ---------- */
+.ck-aviso {
+  position: fixed; left: 24px; bottom: 24px; z-index: 50;
+  width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow: auto;
+  background: #FCF9F6; border: 1px solid #E6DAD3; box-shadow: 0 30px 70px -30px rgba(22,10,15,.45);
+  padding: 32px; display: flex; flex-direction: column; gap: 18px;
+  font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #160A0F;
+}
+.ck-aviso[hidden] { display: none; }
+.ck-config { gap: 6px; }
+.ck-titulo { margin: 0; font-size: 22px; font-weight: 800; }
+.ck-config .ck-titulo { margin-bottom: 12px; }
+.ck-texto { margin: 0; font-size: 15px; line-height: 1.6; color: #3D2C34; }
+.ck-texto a { color: #800039; }
+.ck-botones { display: flex; gap: 10px; margin-top: 4px; }
+.ck-config .ck-botones { margin-top: 18px; }
+.ckbtn {
+  flex: 1; min-height: 48px; padding: 0 16px; border: 1px solid #160A0F; border-radius: 999px;
+  background: transparent; font: inherit; font-size: 15px; font-weight: 700; color: #160A0F; cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.ckbtn:hover { background: #160A0F; color: #FCF9F6; }
+.ck-fila { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; padding: 20px 0; border-top: 1px solid #E6DAD3; }
+.ck-ultima { border-bottom: 1px solid #E6DAD3; }
+.ck-cat { margin: 0; font-weight: 700; }
+.ck-desc { margin: 4px 0 0; font-size: 14px; line-height: 1.55; color: #6E5A63; }
+.ck-tg { position: relative; flex: none; width: 46px; height: 26px; cursor: pointer; }
+.ck-tg input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.ck-tg span[aria-hidden] { position: absolute; inset: 0; border-radius: 999px; background: #E6DAD3; transition: background .2s; pointer-events: none; }
+.ck-tg span[aria-hidden]::after { content: ""; position: absolute; left: 3px; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); transition: left .2s; }
+.ck-tg input:checked + span { background: #800039; }
+.ck-tg input:checked + span::after { left: 23px; }
+.ck-tg input:disabled + span { opacity: .55; }
+.ck-tg input:focus-visible + span { outline: 2px solid #800039; outline-offset: 3px; }
+.ck-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- Móvil (versión base, pendiente de revisar con calma) ---------- */
+@media (max-width: 860px) {
+  body [style*="grid-template-columns"]:not(header *) { grid-template-columns: 1fr !important; }
+  body [style*="grid-column"]:not(header *) { grid-column: auto !important; }
+  body [style*="grid-row"]:not(header *) { grid-row: auto !important; }
+  body [style*="gap:96px"], body [style*="gap:80px"], body [style*="gap:120px"] { gap: 48px !important; }
+  body [style*="margin-top:150px"], body [style*="margin-top:-90px"], body [style*="margin-top:120px"] { margin-top: 0 !important; }
+  section[style*="padding:160px"], section[style*="padding:140px"] { padding-top: 96px !important; padding-bottom: 96px !important; }
+  body [style*="grid-template-columns"] > *, body [style*="display:flex"] > * { min-width: 0; }
+  aside[style*="sticky"] { position: static !important; }
+  .legaltxt table, .art table { display: block; overflow-x: auto; }
+  .legaltxt h2 { font-size: 32px !important; }
+  p[style*="font-weight:800"][style*="clamp("] { margin-left: 0 !important; margin-right: 0 !important; font-size: clamp(38px, 11vw, 56px) !important; }
+  h1[style*="font-weight:800"] { font-size: clamp(36px, 10vw, 52px) !important; }
+  h2 { margin-left: 0 !important; margin-right: 0 !important; font-size: clamp(36px, 10vw, 52px) !important; }
+  h2[style*="text-align:right"] { text-align: left !important; }
+  header > div { grid-template-columns: auto 1fr !important; row-gap: 14px !important; padding-top: 14px !important; padding-bottom: 14px !important; }
+  header nav { grid-column: 1 / -1; grid-row: 2; justify-content: space-between !important; gap: 12px !important; font-size: 16px !important; }
+  header > div > a:last-child { min-height: 42px !important; padding: 0 20px !important; }
+  .ck-aviso { left: 16px; bottom: 16px; padding: 24px; }
+  .ck-botones { flex-wrap: wrap; }
+  .ckbtn { flex: 1 1 30%; }
+}

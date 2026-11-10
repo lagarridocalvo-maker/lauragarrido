@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+import { INDEXAR, GA4_ID, META_PIXEL_ID } from '../config.mjs';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  css?: string;
+  schemas?: object[];
+  tipo?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const { title, description, path, css = '', schemas = [], tipo = 'website', noindex = false } = Astro.props;
+const canonical = new URL(path, Astro.site).href.replace(/\/$/, path === '/' ? '/' : '');
+const robots = !INDEXAR || noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
+const imagen = new URL('/img/laura-sonriendo.webp', Astro.site).href;
+const ajustes = JSON.stringify({ ga4: GA4_ID, pixel: META_PIXEL_ID });
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="robots" content={robots}>
+  <link rel="canonical" href={canonical}>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <meta name="theme-color" content="#FCF9F6">
+  <meta property="og:type" content={tipo}>
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Laura Garrido">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={canonical}>
+  <meta property="og:image" content={imagen}>
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&family=Syncopate:wght@700&display=swap">
+  <style is:inline set:html={css}></style>
+  {schemas.map((s) => <script type="application/ld+json" is:inline set:html={JSON.stringify(s)} />)}
+  <script is:inline set:html={`window.LG_AJUSTES=${ajustes};`}></script>
+  <script is:inline>
+    // Consent Mode v2: todo denegado hasta que la persona elija.
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
+      analytics_storage: 'denied', functionality_storage: 'granted', security_storage: 'granted',
+      wait_for_update: 500
+    });
+  </script>
+</head>
+<body>
+  <slot />
+
+  <div class="ck-aviso" id="ck-aviso" role="dialog" aria-modal="false" aria-labelledby="ck-titulo" hidden>
+    <p class="ck-titulo" id="ck-titulo">Antes de seguir, las cookies</p>
+    <p class="ck-texto">Uso cookies necesarias para que la web funcione y, solo si aceptas, cookies de análisis y de publicidad para saber qué funciona y medir mis anuncios. Puedes aceptarlas, rechazarlas o elegir cuáles. Más información en la <a href="/legal#cookies">política de cookies</a>.</p>
+    <div class="ck-botones">
+      <button type="button" class="ckbtn" data-ck="rechazar">Rechazar</button>
+      <button type="button" class="ckbtn" data-ck="configurar">Configurar</button>
+      <button type="button" class="ckbtn" data-ck="aceptar">Aceptar</button>
+    </div>
+  </div>
+
+  <div class="ck-aviso ck-config" id="ck-config" role="dialog" aria-modal="false" aria-labelledby="ck-titulo2" hidden>
+    <p class="ck-titulo" id="ck-titulo2">Configurar cookies</p>
+    <div class="ck-fila">
+      <div><p class="ck-cat">Necesarias</p><p class="ck-desc">Hacen que la web funcione y recuerdan tu elección. Siempre activas.</p></div>
+      <label class="ck-tg"><input type="checkbox" checked disabled><span aria-hidden="true"></span><span class="ck-sr">Necesarias, siempre activas</span></label>
+    </div>
+    <div class="ck-fila">
+      <div><p class="ck-cat">Análisis</p><p class="ck-desc">Cuántas personas visitan la web y qué páginas leen.</p></div>
+      <label class="ck-tg"><input type="checkbox" id="ck-analitica"><span aria-hidden="true"></span><span class="ck-sr">Cookies de análisis</span></label>
+    </div>
+    <div class="ck-fila ck-ultima">
+      <div><p class="ck-cat">Publicidad</p><p class="ck-desc">Medir si los anuncios en Instagram y Facebook traen contactos.</p></div>
+      <label class="ck-tg"><input type="checkbox" id="ck-publicidad"><span aria-hidden="true"></span><span class="ck-sr">Cookies de publicidad</span></label>
+    </div>
+    <div class="ck-botones">
+      <button type="button" class="ckbtn" data-ck="rechazar">Rechazar todas</button>
+      <button type="button" class="ckbtn" data-ck="guardar">Guardar elección</button>
+      <button type="button" class="ckbtn" data-ck="aceptar">Aceptar todas</button>
+    </div>
+  </div>
+
+  <script src="../scripts/site.js"></script>
+</body>
+</html>

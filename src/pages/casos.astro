@@ -1,0 +1,7 @@
+---
+import Base from '../layouts/Base.astro';
+import datos from '../contenido/casos.json';
+---
+<Base title="Casos de marketing para pymes en Palencia y Valladolid | Laura Garrido" description="Cómo trabajo con empresas reales: el caso de Get Subvenciones, con campañas, vídeo y seguimiento de cada posible cliente." path="/casos" css={datos.css} schemas={datos.schemas}>
+  <Fragment set:html={datos.body} />
+</Base>

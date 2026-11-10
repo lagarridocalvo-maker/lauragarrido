@@ -1,0 +1,7 @@
+---
+import Base from '../layouts/Base.astro';
+import datos from '../contenido/sobre-mi.json';
+---
+<Base title="Sobre mí | Laura Garrido, marketing para pymes en Palencia y Valladolid" description="Soy Laura Garrido, especialista en marketing digital. Me sumo a tu equipo para llevar el marketing de tu pyme en Palencia y Valladolid." path="/sobre-mi" css={datos.css} schemas={datos.schemas}>
+  <Fragment set:html={datos.body} />
+</Base>

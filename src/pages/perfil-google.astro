@@ -1,0 +1,7 @@
+---
+import Base from '../layouts/Base.astro';
+import datos from '../contenido/perfil-google.json';
+---
+<Base title="Perfil de Google para negocios en Palencia y Valladolid | Laura Garrido" description="Te dejo listo el perfil de empresa de tu negocio en Google para que te encuentren en Google Maps: datos, fotos, horario y reseñas." path="/perfil-google" css={datos.css} schemas={datos.schemas}>
+  <Fragment set:html={datos.body} />
+</Base>

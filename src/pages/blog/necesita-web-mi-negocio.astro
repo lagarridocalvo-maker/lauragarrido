@@ -1,0 +1,7 @@
+---
+import Base from '../../layouts/Base.astro';
+import datos from '../../contenido/blog--necesita-web-mi-negocio.json';
+---
+<Base title="¿Necesita web mi negocio si ya me encuentran por Google? | Laura Garrido" description="Sí, tu negocio necesita web aunque ya te encuentren por Google. El perfil de Google hace que te encuentren y te da lo básico: dónde estás, cuándo abres y…" path="/blog/necesita-web-mi-negocio" css={datos.css} schemas={datos.schemas} tipo="article">
+  <Fragment set:html={datos.body} />
+</Base>

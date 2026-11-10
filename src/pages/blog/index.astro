@@ -1,0 +1,7 @@
+---
+import Base from '../../layouts/Base.astro';
+import datos from '../../contenido/blog.json';
+---
+<Base title="Blog de marketing para pymes en Palencia y Valladolid | Laura Garrido" description="Artículos sobre Google Maps, webs y cómo conseguir clientes para gestorías, asesorías y pymes de Palencia y Valladolid." path="/blog" css={datos.css} schemas={datos.schemas}>
+  <Fragment set:html={datos.body} />
+</Base>

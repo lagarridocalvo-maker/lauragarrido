@@ -1,0 +1,7 @@
+---
+import Base from '../layouts/Base.astro';
+import datos from '../contenido/gracias.json';
+---
+<Base title="Mensaje recibido | Laura Garrido" description="Gracias por escribirme. Te respondo en menos de 48 horas." path="/gracias" css={datos.css} schemas={datos.schemas} noindex>
+  <Fragment set:html={datos.body} />
+</Base>

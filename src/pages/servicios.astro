@@ -1,0 +1,7 @@
+---
+import Base from '../layouts/Base.astro';
+import datos from '../contenido/servicios.json';
+---
+<Base title="Servicios de marketing para pymes en Palencia y Valladolid | Laura Garrido" description="Diagnóstico, perfil de Google, webs, redes y email marketing para pymes de Palencia y Valladolid. Primero el objetivo, después todo lo demás." path="/servicios" css={datos.css} schemas={datos.schemas}>
+  <Fragment set:html={datos.body} />
+</Base>

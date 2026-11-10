@@ -1,0 +1,7 @@
+---
+import Base from '../layouts/Base.astro';
+import datos from '../contenido/legal.json';
+---
+<Base title="Aviso legal, privacidad y cookies | Laura Garrido" description="Aviso legal, política de privacidad y política de cookies de lauragarrido.com." path="/legal" css={datos.css} schemas={datos.schemas}>
+  <Fragment set:html={datos.body} />
+</Base>
