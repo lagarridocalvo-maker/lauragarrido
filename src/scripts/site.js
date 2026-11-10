@@ -59,6 +59,12 @@ luzContenedor('.faq', '.luzfaq', 'summary');
 luzContenedor('.lista', '.luzlista', '.suelto');
 
 // ---------- Formularios → Google Sheets ----------
+document.querySelectorAll('form[data-form] input[name="privacidad"]').forEach((chk) => {
+  const aviso = () => chk.setCustomValidity(chk.checked ? '' : 'Marca esta casilla para poder enviarlo.');
+  aviso();
+  chk.addEventListener('change', aviso);
+});
+
 document.querySelectorAll('form[data-form]').forEach((form) => {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();

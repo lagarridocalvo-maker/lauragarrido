@@ -70,3 +70,9 @@ button.hablamos:disabled { opacity: .6; cursor: wait; }
   .ck-botones { flex-wrap: wrap; }
   .ckbtn { flex: 1 1 30%; }
 }
+
+/* Casilla de privacidad obligatoria */
+.obl { color: #800039; font-weight: 600; white-space: nowrap; }
+.check.claro .obl { color: inherit; }
+.check:has(input:user-invalid) span { color: #800039; }
+.check:has(input:user-invalid) input { outline: 2px solid #800039; outline-offset: 2px; }
