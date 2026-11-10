@@ -177,3 +177,41 @@ document.querySelectorAll('a[href="#configurar-cookies"]').forEach((a) => {
 const previa = leerEleccion();
 if (previa) aplicar(previa);
 else aviso.hidden = false;
+
+// ---------- Menú móvil (tres rayas) ----------
+(() => {
+  const barra = document.querySelector('header > div');
+  const nav = barra && barra.querySelector('nav');
+  if (!nav) return;
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'menu-btn';
+  btn.setAttribute('aria-label', 'Abrir menú');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-controls', 'menu-movil');
+  btn.innerHTML = '<span aria-hidden="true"></span>';
+  barra.appendChild(btn);
+
+  const panel = document.createElement('div');
+  panel.className = 'menu-movil';
+  panel.id = 'menu-movil';
+  const enlaces = [...nav.querySelectorAll('a')].map((a) => {
+    const actual = a.getAttribute('href') !== '/' && location.pathname.startsWith(a.getAttribute('href'));
+    return `<a href="${a.getAttribute('href')}"${actual ? ' aria-current="page"' : ''}>${a.textContent}</a>`;
+  }).join('');
+  const hablamos = document.getElementById('hablamos') ? '#hablamos' : '/#hablamos';
+  panel.innerHTML = `<nav aria-label="Menú">${enlaces}</nav>
+    <div><a class="menu-hablamos" href="${hablamos}">Hablamos <span aria-hidden="true">↘</span></a>
+    <p class="menu-contacto">WhatsApp <a href="https://wa.me/34665130173">+34 665 130 173</a></p></div>`;
+  document.body.appendChild(panel);
+
+  const abrir = (si) => {
+    document.documentElement.classList.toggle('menu-abierto', si);
+    btn.setAttribute('aria-expanded', String(si));
+    btn.setAttribute('aria-label', si ? 'Cerrar menú' : 'Abrir menú');
+  };
+  btn.addEventListener('click', () => abrir(!document.documentElement.classList.contains('menu-abierto')));
+  panel.addEventListener('click', (e) => { if (e.target.closest('a')) abrir(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') abrir(false); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 860) abrir(false); });
+})();
