@@ -86,7 +86,8 @@ button.hablamos:disabled { opacity: .6; cursor: wait; }
   #inicio + section { padding-top: 64px !important; padding-bottom: 72px !important; }
   #inicio + section ul { margin-top: 0 !important; }
   #inicio + section > div { gap: 40px !important; }
-  #quien [style*="repeat(3,1fr)"] { grid-template-columns: 1fr !important; gap: 20px !important; margin-top: 24px !important; }
+  #quien [style*="repeat(3,1fr)"] { grid-template-columns: 1fr !important; gap: 20px !important; margin-top: -8px !important; }
+  #quien p[style*="margin:56px 48px 0 0"] { margin-top: 24px !important; }
   #quien [style*="repeat(3,1fr)"] p { margin: 0 !important; }
   #quien > div > div[style*="aspect-ratio"] { margin-top: 56px; }
   .ck-aviso { left: 16px; bottom: 16px; padding: 24px; }
